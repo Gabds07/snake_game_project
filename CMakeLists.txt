@@ -10,6 +10,10 @@ add_executable(snake-game-project main.cpp
         Player/Snake.cpp
         Apple/Apple.cpp
         Apple/Apple.hpp
+        Player/Collision.cpp
+        Player/Collision.hpp
+        Apple/Apple-snake_interaction.cpp
+        Apple/Apple-snake_interaction.hpp
 )
 
 target_link_libraries(snake-game-project sfml-graphics sfml-window sfml-system)
