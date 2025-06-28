@@ -1,38 +1,37 @@
 #include <SFML/Graphics.hpp>
 #include "./Snake.hpp"
+#include "../Apple/Apple-snake_interaction.hpp"
 
 using namespace sf;
 
-RectangleShape snakeDraw() {
-    RectangleShape snake;
-    snake.setSize(Vector2f(100, 20));
-    snake.setFillColor(Color::Green);
-    snake.setPosition(450, 550);
-
-    return snake;
+RectangleShape snakeDraw(RectangleShape * &snake, RectangleShape * &apple) {
+    snake->setSize({80.f, 20.f});
+    snake->setFillColor(Color::Green);
+    snake->setPosition(450, 550);
+    return *snake;
 }
 
-void snakeMovement(RectangleShape* &snake) {
+void snakeMovement(RectangleShape * &snake, RectangleShape * &apple) {
     if (Keyboard::isKeyPressed(Keyboard::Key::D) &&
         !Keyboard::isKeyPressed(Keyboard::Key::W) &&
         !Keyboard::isKeyPressed(Keyboard::Key::S)) {
-        snake->setSize(Vector2f(100, 20));
+        snake->setSize({80.f, 20.f});
         snake->move({5.0f, 0.f});
     }
     if (Keyboard::isKeyPressed(Keyboard::Key::A) &&
         !Keyboard::isKeyPressed(Keyboard::Key::W) &&
         !Keyboard::isKeyPressed(Keyboard::Key::S)) {
-        snake->setSize(Vector2f(100, 20));
+        snake->setSize({80.f, 20.f});
         snake->move({-5.0f, 0.f});
     }
 
     if (Keyboard::isKeyPressed(Keyboard::Key::S)) {
-        snake->setSize(Vector2f(20, 100));
+        snake->setSize({20.f, 80.f});
         snake->move({0.f, 5.0f});
     }
 
     if (Keyboard::isKeyPressed(Keyboard::Key::W)) {
-        snake->setSize(Vector2f(20, 100));
+        snake->setSize({20.f, 80.f});
         snake->move({0.f, -5.0f});
     }
 

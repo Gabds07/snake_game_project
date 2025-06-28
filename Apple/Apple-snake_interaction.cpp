@@ -1,22 +1,27 @@
 #include <SFML/Graphics.hpp>
-#include <random>
+#include <cstdlib>
 
 #include "Apple-snake_interaction.hpp"
 
 using namespace std;
 using namespace sf;
 
-void apple_snake_collision(RectangleShape * &snake, RectangleShape * &apple) {
-    minstd_rand generator;
-    uniform_real_distribution<float> distribution_x(1.f, 780.f);
-    uniform_real_distribution<float> distribution_y(1.f, 980.f);
+Vector2f generate_random_coordinates() {
+    Vector2f randomNum;
 
-    if (snake->getPosition() == apple->getPosition())
+    randomNum.x = 1.f + rand() % 980;
+    randomNum.y = 1.f + rand() % 780;
+
+    return randomNum;
+}
+
+void apple_snake_collision(RectangleShape * &snake, RectangleShape * &apple) {
+    if (snake->getGlobalBounds().intersects(apple->getGlobalBounds())) {
         apple->setSize({0.f, 0.f});
+    }
 
     if (apple->getSize() == Vector2f(0.f, 0.f)) {
-        RenderWindow appleRender;
-        apple->setPosition(distribution_x(generator), distribution_y(generator));
-        appleRender.draw(*apple);
+        apple->setSize({20.f, 20.f});
+        apple->setPosition(generate_random_coordinates());
     }
 }

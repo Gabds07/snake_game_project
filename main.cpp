@@ -11,15 +11,14 @@ int main() {
     RenderWindow window(VideoMode(1000, 800), "Snake Game");
     window.setFramerateLimit(120);
 
-    auto* snake = new RectangleShape();
-    *snake = snakeDraw();
+    auto *snake = new RectangleShape();
 
-    auto* apple = new RectangleShape();
+    auto *apple = new RectangleShape();
+
     *apple = appleDraw();
-
+    *snake = snakeDraw(snake, apple);
 
     while (window.isOpen()) {
-
         Event event{};
         while (window.pollEvent(event)) {
             if (event.type == Event::Closed) {
@@ -27,7 +26,7 @@ int main() {
             }
         }
 
-        snakeMovement(snake);
+        snakeMovement(snake, apple);
         apple_snake_collision(snake, apple);
         snake_collision(snake);
         window.clear();
